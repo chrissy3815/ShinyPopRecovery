@@ -5,20 +5,10 @@ ui <- fluidPage(
   theme = bslib::bs_theme(preset = "minty"),
   
   # Application title
-  navbarPage("ShinyPopRecovery", collapsible=TRUE, selected="DENSITY-DEPENDENT RECOVERY TRAJECTORIES",
-             tags$div(id = 'tagline',
-                      HTML("This webapp enables users to play around with <b>density-dependent </b>
-                matrix population models (MPMs) in R using a generalized functions that can be applied 
-                to data-poor settings, <i>i.e.</i> where there is insufficient data to fit a density-dependent 
-                model directly.
-                The app contains a series of example MPMs, with lots of options for 
-                different density-dependent functional forms, each with different parameters
-                that control the shape/strength of density dependence.
-                The USER GUIDE contains detailed information: take a look before you have a play!
-               "),
-                      p(),
-             ),
-             br(),
+  titlePanel("ShinyPopRecovery"),
+  
+
+  tabsetPanel(selected="DENSITY-DEPENDENT RECOVERY TRAJECTORIES",
              # User guide
              tabPanel("USER GUIDE",
                       h3("USER GUIDE"),
@@ -57,7 +47,7 @@ ui <- fluidPage(
                      </li>
                  </ul>"
                       ),
-                      br(), br(), br(), br(),
+                      br(), br(), 
                       h3("CONTACT ME"),
                       HTML("This app and the associated R package are currently 
                            under construction, and I would really appreciate any
@@ -70,7 +60,7 @@ ui <- fluidPage(
                            </ul>
                            "),
                       br(),
-                      HTML("To save us both some time, here are a few features I
+                      HTML("To save us all some time, here are a few features I
                            am planning to add:
                            <ul>
                               <li> Allow users to enter their own MPM. </li>
@@ -163,39 +153,60 @@ ui <- fluidPage(
                                                                    value=25, min=1, max=10000, step=10)
                                      ),
                         ),
-                        
                         mainPanel(
-                          # Output: population projection ----
-                          card(
-                            card_header('Population projection plot'),
-                            plotOutput('projplot')
-                          ),
-                          
-                          card(
-                            card_header('Selected functional form of density dependence'),
-                            plotOutput('DDfuncplot')
-                          ),
-                          
-                          value_box(
-                            title='Selected matrix population model',
-                            div(tableOutput("mpm"), style='font-size:80%')
-                          ),
-                          
-                          card(
-                            card_header('Description of selected matrix and associated study'),
-                            htmlOutput("metadata")
-                          ),
-                          
-                          value_box(
-                            title='Carrying capacity',
-                            value=textOutput("K"),
-                            theme='teal',
-                            max_height='100px'
+                          tabsetPanel(
+                            selected='QUICK-START GUIDE',
+                            type='tabs',
+                            # Quick-start guide tab
+                            tabPanel("QUICK-START GUIDE",
+                              h3("Title"),
+                              HTML("If you're not sure where to start, let me suggest:
+                                   <ol>
+                                   <li> Select an example matrix. The app will 
+                                   auto-populate with the default settings 
+                                   for this population. </li>
+                                   <li> First, try changing the density-dependence 
+                                   parameter (carrying capacity, scaling parameter, etc.). 
+                                   See how it changes the population trajectory, 
+                                   and the functional form in the DENSITY DEPENDENCE tab. </li>
+                                   </ol>
+                                   ")
+                            ),
+                            
+                            # Output: population projection ----
+                            tabPanel("RECOVERY SIMULATION",
+                                     card(
+                                       card_header('Population projection plot'),
+                                       plotOutput('projplot')
+                                     ),
+                                     value_box(
+                                       title='Carrying capacity',
+                                       value=textOutput("K"),
+                                       theme='teal',
+                                       max_height='100px'
+                                     )
+                            ),
+                            tabPanel("DENSITY DEPENDENCE",
+                                     card(
+                                       card_header('Selected functional form of density dependence'),
+                                       plotOutput('DDfuncplot')
+                                     ),
+                            ),
+                            tabPanel("MATRIX",
+                                     value_box(
+                                       title='Selected matrix population model',
+                                       div(tableOutput("mpm"), style='font-size:80%')
+                                     ),
+                                     
+                                     card(
+                                       card_header('Description of selected matrix and associated study'),
+                                       htmlOutput("metadata")
+                                     ),
+                            )
+                            
                           )
-                        )
-                      ),
-             )
-             
-             
-  )
-)
+                        ),
+                      )
+             ) # close navbarPage
+  ) # close fluidPage
+) # close UI

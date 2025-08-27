@@ -1,6 +1,6 @@
 library(shiny)
 library(bslib)
-source('/Users/Chrissy/MSCA/ddRecoveryProjections/code/projectDD_functions.R')
+source('projectDD_functions.R')
 load('data/ExampleMPMs_forShiny.RDS')
 
 # Define UI for app that does density-dependent population trajectories ----

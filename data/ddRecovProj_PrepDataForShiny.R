@@ -16,16 +16,26 @@ whitedeer<- list("Amat"=whitedeerA,
                  "Umat"=whitedeerU,
                  "N0"=whitedeerN0,
                  "metadata"="The white-tailed deer example matrix comes from a 
-                 study in southeastern Michigan (Jensen 1995 <i>Ecological 
-                 Modelling</i>). <br>
+                 study in southeastern Michigan (<a href='https://doi.org/10.1016/0304-3800(93)E0081-D'>Jensen 1995 <i>Ecological 
+                 Modelling</i></a>). 
+                 <br><br>
+                 The published model and its default settings for ShinyPopRecovery: 
+                 <ul>
+                     <li>a prebreeding Leslie (age-based) matrix for parameters at low density </li>
+                     <li>logistic density dependence</li>
+                     <li>applied to the entire matrix</li>
+                     <li>carrying capacity, K=110 female deer.</li>
+                 </ul>
+                 <br>
+                 <h5>Brief description of the study background and aims:</h5>
                  In 1927, an enclosure was built around a 464-ha 
                  area in a nature reserve, and 2 male and 4 female deer were 
                  introduced into the enclosure. Pulling together evidence about 
                  the carrying capacity of the enclosure (220 total individuals, 
                  110 females), a life table, and a fecundity schedule for 
                  white-tailed deer at low population densities, Jensen built a 
-                 <b>prebreeding Leslie matrix</b> and explored its behavior under 
-                 <b>logistic density dependence</b> which operates on the entire 
+                 prebreeding Leslie matrix and explored its behavior under 
+                 logistic density dependence which operates on the entire 
                  projection matrix.")
 
 # Jensen2 gray wolves:
@@ -105,9 +115,9 @@ falcons<- list("Amat"=falconsA,
                "Fmat"=falconsF,
                "Umat"=falconsU,
                "N0"=falconsN0,
-               "metadata"="The peregrine falcon (<i>Falco peregrinus anatum</i>)
+               "metadata"="The peregrine falcon (<i> Falco peregrinus anatum</i>)
                example comes from a study in California, USA (Schipper et al. 
-               2013 <i>Journal of Applied Ecology</i>). Management of peregrine
+               2013 Journal of Applied Ecology). Management of peregrine
                falcons included a captive breeding program and population monitoring
                starting from 1975. <br>
                MORE TO BE ADDED HERE.")

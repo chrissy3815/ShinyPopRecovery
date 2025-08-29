@@ -25,8 +25,8 @@ server <- function(input, output) {
     eval(parse(text=paste0("MPMs_preloaded$",input$matrixID,"$Amat")))
   }, rownames=TRUE, colnames=TRUE, align='c', spacing='s', digits=3, na="0.000")
   
-  output$metadata<- renderText({
-    eval(parse(text=paste0("MPMs_preloaded$",input$matrixID,"$metadata")))
+  output$metadata<- renderUI({
+    HTML(eval(parse(text=paste0("MPMs_preloaded$",input$matrixID,"$metadata"))))
   })
   
   output$K<- renderText({

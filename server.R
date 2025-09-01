@@ -49,7 +49,7 @@ server <- function(input, output) {
   
   output$mpm<- renderTable({
     eval(parse(text=paste0("MPMs_preloaded$",input$matrixID,"$Amat")))
-  }, rownames=TRUE, colnames=TRUE, align='c', spacing='s', digits=3, na="0.000")
+  }, rownames=TRUE, colnames=TRUE, align='c', spacing='s', digits=2)
   
   output$metadata<- renderUI({
     HTML(eval(parse(text=paste0("MPMs_preloaded$",input$matrixID,"$metadata"))))
@@ -89,8 +89,7 @@ server <- function(input, output) {
          xlab='Population size', ylab='Scaling factor', lwd=2)
   })
   
-  output$projplot<- renderPlot({
-    
+  proj_out<- reactive({
     Fmat<- eval(parse(text=paste0("MPMs_preloaded$",input$matrixID,"$Fmat")))
     Umat<- eval(parse(text=paste0("MPMs_preloaded$",input$matrixID,"$Umat")))
     
@@ -119,24 +118,32 @@ server <- function(input, output) {
     } else{
       proj_out<- tryCatch({
         withCallingHandlers({project_Dfactor(Fmat, Umat, vector=N0, time=input$tmax, return.vec=TRUE,
-                                 DDfunc=input$DDfunc, DDparams=DDparams,
-                                 DDmethod=input$DDmethod)},
+                                             DDfunc=input$DDfunc, DDparams=DDparams,
+                                             DDmethod=input$DDmethod)},
                             warning = function(w) {
                               warning_message(conditionMessage(w))  # Capture warning
                               invokeRestart("muffleWarning")  # Prevent it from printing
                             })
-        })
+      })
     }
+    return(proj_out)
+  })
+  
+  output$projplot<- renderPlot({
     
-    if(sum(!is.na(proj_out$pop))<2){
+    if(sum(!is.na(proj_out()$pop))<2){
       plot(NULL, cex.lab=1.5, cex.axis=1.5, xlim=c(0, input$tmax), ylim=c(0,100),
            xlab='Years since recovery initiated', ylab='Population size', main='')
     } else{
-      plot(proj_out$pop[-1], type='l', lwd=4, lty=2, cex.lab=1.5, cex.axis=1.5,
+      plot(proj_out()$pop[-1], type='l', lwd=4, lty=2, cex.lab=1.5, cex.axis=1.5,
            xlab='Years since recovery initiated', ylab='Population size', main='')
     }
     
   })
+  
+  output$projtable<- renderTable(
+    t(proj_out()$vec), rownames=TRUE, colnames=TRUE, align='c', spacing='s', digits=3, na="0.000"
+    )
   
   output$warning_card <- renderUI({
     req(warning_message())  # Show only if there's a warning

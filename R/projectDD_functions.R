@@ -579,6 +579,7 @@ project_Dfactor<- function(Fmat, Umat, vector=NULL, time=100, return.vec=TRUE,
   Vec <- matrix(0, ncol = order, nrow = time + 1)
   Pop <- rep(NA, (time + 1))
   dimnames(Vec)[[2]] <- stagenames
+  dimnames(Vec)[[1]] <- 1:(time+1)
   Vec[1, ] <- n0
   Pop[1] <- sum(n0)
   for (i in 1:time) {

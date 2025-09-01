@@ -204,7 +204,13 @@ ui <- fluidPage(
                                         value=textOutput("K"),
                                         theme='teal',
                                         max_height='100px'
-                                      )
+                                      ),
+                                      
+                                      card(
+                                        card_header('Population structure across time steps'),
+                                        HTML("<p>Age or stage classes are the rows, time steps are the columns.</p>"),
+                                        div(tableOutput("projtable"), style='font-size:80%')
+                                     )
                              ),
                              
                              tabPanel("DENSITY DEPENDENCE",

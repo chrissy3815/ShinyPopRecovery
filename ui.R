@@ -179,7 +179,8 @@ ui <- fluidPage(
                                    <li> You could also <b>try changing the funciontal form of
                                    density dependence</b>. The parameters you can set may change 
                                    (<i>e.g.</i>, K in the case of the logistic function, b in the 
-                                   case of the Ricker and Beverton-Holt models). </li>
+                                   case of the Ricker and Beverton-Holt models). If the results don't 
+                                   look the way you expect, try changing this parameter again.</li>
                                    <li> Finally, you might see how much the initial conditions matter
                                    by <b>changing the initial vector</b>. What happens to the RECOVERY 
                                    SIMULATION if you change the starting population structure to a 

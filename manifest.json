@@ -759,6 +759,35 @@
         "Built": "R 4.5.0; ; 2025-07-04 07:50:00 UTC; unix"
       }
     },
+    "shinyFeedback": {
+      "Source": "CRAN",
+      "Repository": "https://cran.rstudio.com",
+      "description": {
+        "Package": "shinyFeedback",
+        "Type": "Package",
+        "Title": "Display User Feedback in Shiny Apps",
+        "Version": "0.4.0",
+        "Date": "2021-09-23",
+        "Authors@R": "c(\n  person(\"Andy\", \"Merlino\", email = \"andy.merlino@tychobra.com\", role = c(\"aut\", \"cre\")),\n  person(\"Patrick\", \"Howard\", email = \"patrick.howard@tychobra.com\", role = c(\"aut\")))",
+        "Description": "Easily display user feedback in Shiny apps.",
+        "License": "MIT + file LICENSE",
+        "Depends": "R (>= 3.1.2)",
+        "RoxygenNote": "7.1.2",
+        "Encoding": "UTF-8",
+        "Suggests": "knitr, rmarkdown",
+        "VignetteBuilder": "knitr",
+        "Imports": "fontawesome, htmltools, jsonlite, shiny",
+        "URL": "https://github.com/merlinoa/shinyFeedback",
+        "BugReports": "https://github.com/merlinoa/shinyFeedback/issues",
+        "NeedsCompilation": "no",
+        "Packaged": "2021-09-23 17:26:42 UTC; andy",
+        "Author": "Andy Merlino [aut, cre],\n  Patrick Howard [aut]",
+        "Maintainer": "Andy Merlino <andy.merlino@tychobra.com>",
+        "Repository": "CRAN",
+        "Date/Publication": "2021-09-23 18:30:08 UTC",
+        "Built": "R 4.5.0; ; 2025-04-01 20:37:03 UTC; unix"
+      }
+    },
     "sourcetools": {
       "Source": "CRAN",
       "Repository": "https://cran.rstudio.com",
@@ -841,20 +870,32 @@
     }
   },
   "files": {
-    "app.R": {
-      "checksum": "9883b0d534f9253b94ac321e8fb36965"
-    },
     "data/ddRecovProj_PrepDataForShiny.R": {
-      "checksum": "88318b0ea9f7852bdd15d67907996d7d"
+      "checksum": "d07a87cc4fa2d4b61d8acbcaa6acd4a5"
     },
     "data/ExampleMPMs_forShiny.RDS": {
-      "checksum": "b922adc430d1a0b973b267f9f7b738a2"
+      "checksum": "3c06b4c82c201231a7ebe8f4b4e57252"
+    },
+    "global.R": {
+      "checksum": "c653de05df4cf61ed217a03f2ac432a4"
     },
     "LICENSE": {
       "checksum": "0ec4a8be366a94376572e0cd964d1ac8"
     },
+    "R/projectDD_functions.R": {
+      "checksum": "6f640e89a943884fc2edac31b03f52ce"
+    },
     "README.md": {
       "checksum": "a442a1b78ee1bee9c0a1c38f50ee56e2"
+    },
+    "runApp.R": {
+      "checksum": "b581f500e8604c520b3cc47a73d940f0"
+    },
+    "server.R": {
+      "checksum": "09d2b2dba7c4b2eefad61001137141fa"
+    },
+    "ui.R": {
+      "checksum": "b2f3f4fcffa4e16b7494aaabebd5af91"
     }
   },
   "users": null

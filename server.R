@@ -1,5 +1,26 @@
 # Define server logic required to draw a histogram ----
 server <- function(input, output) {
+  warning_message<- reactiveVal(NULL)
+  
+  observeEvent(
+    {
+      input$matrixID
+      input$DDfunc
+      input$K
+      input$b
+      input$x0
+      input$x1
+      input$theta
+      input$DDmethod
+      input$tmax
+      input$vectorMethod
+      input$DDelem
+      input$n_adults
+    },
+    {
+      warning_message(NULL)
+    }
+  )
   
   # Case-specific defaults:
   observeEvent(input$matrixID, {
@@ -96,13 +117,46 @@ server <- function(input, output) {
                                  DDfunc=input$DDfunc, DDparams=DDparams,
                                  DDmethod='reprotrans')
     } else{
-      proj_out<- project_Dfactor(Fmat, Umat, vector=N0, time=input$tmax, return.vec=TRUE,
+      proj_out<- tryCatch({
+        withCallingHandlers({project_Dfactor(Fmat, Umat, vector=N0, time=input$tmax, return.vec=TRUE,
                                  DDfunc=input$DDfunc, DDparams=DDparams,
-                                 DDmethod=input$DDmethod)
+                                 DDmethod=input$DDmethod)},
+                            warning = function(w) {
+                              warning_message(conditionMessage(w))  # Capture warning
+                              invokeRestart("muffleWarning")  # Prevent it from printing
+                            })
+        })
     }
     
-    plot(proj_out$pop[-1], type='l', lwd=4, lty=2, cex.lab=1.5, cex.axis=1.5,
-         xlab='Years since recovery initiated', ylab='Population size', main='')
+    if(sum(!is.na(proj_out$pop))<2){
+      plot(NULL, cex.lab=1.5, cex.axis=1.5, xlim=c(0, input$tmax), ylim=c(0,100),
+           xlab='Years since recovery initiated', ylab='Population size', main='')
+    } else{
+      plot(proj_out$pop[-1], type='l', lwd=4, lty=2, cex.lab=1.5, cex.axis=1.5,
+           xlab='Years since recovery initiated', ylab='Population size', main='')
+    }
+    
+  })
+  
+  output$warning_card <- renderUI({
+    req(warning_message())  # Show only if there's a warning
+    
+    # Display a card with the warning
+    tags$div(
+      class = "card border-warning mb-3",
+      style = "max-width: 100%;",
+      tags$div(class = "card-header bg-warning text-white", "⚠️ Warning"),
+      tags$div(class = "card-body",
+               tags$p(class = "card-text", warning_message()),
+               tags$p("Negative values in the population projection matrix or population vector
+                      are biologically unrealistic - we cannot have a negative number of adults!"),
+               tags$hr(),
+               tags$p("💡 Suggestion: Try using a different functional form of density-dependence
+                      or a different way of applying density dependence."),
+               tags$p("The logistic function, applied to the entire matrix, is particularly prone 
+                      to generating negative values in the matrix or vector.")
+      )
+    )
   })
   
 }

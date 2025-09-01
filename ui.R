@@ -3,6 +3,7 @@
 ui <- fluidPage(
   
   theme = bslib::bs_theme(preset = "minty"),
+  shinyFeedback::useShinyFeedback(),
   
   # Application title
   titlePanel("ShinyPopRecovery"),
@@ -77,7 +78,9 @@ ui <- fluidPage(
               tabPanel("Density-Dependent Recovery Trajectories",
                        sidebarLayout(
                          sidebarPanel(width=4,
-                                      selectInput("matrixID", label='Population matrix', 
+                                      h4("Model specification"),
+                                      
+                                      selectInput("matrixID", label='Example population matrix', 
                                                   choices=c("White-tailed deer" = 'whitedeer',
                                                             "Gray wolves" = 'graywolves',
                                                             "Crocodiles" = 'crocs',
@@ -161,9 +164,9 @@ ui <- fluidPage(
                                       h3("Welcome to ShinyPopRecovery!"),
                                       HTML("If you're not sure where to start, let me suggest:
                                    <ol>
-                                   <li> First, <b>select an example matrix.</b> The app will 
-                                   auto-populate with the default settings 
-                                   for this population. </li>
+                                   <li> First, <b>select an example population matrix.</b> The app will 
+                                   auto-populate with the default settings for this population. 
+                                   You can see the results in the RECOVERY SIMULATION tab. </li>
                                    <li> Next, <b>try changing the density-dependence 
                                    parameter</b> (<i>e.g.</i> K or b). See how it changes the RECOVERY SIMULATION, 
                                    and the functional form in the DENSITY DEPENDENCE tab. </li>
@@ -192,6 +195,9 @@ ui <- fluidPage(
                                         card_header('Population projection plot'),
                                         plotOutput('projplot')
                                       ),
+                                      
+                                      uiOutput("warning_card"),
+                                      
                                       value_box(
                                         title='Carrying capacity',
                                         value=textOutput("K"),

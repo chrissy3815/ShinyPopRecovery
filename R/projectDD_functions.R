@@ -593,8 +593,8 @@ project_Dfactor<- function(Fmat, Umat, vector=NULL, time=100, return.vec=TRUE,
     # If the projection matrix has any negative values in it, stop iterating but
     # return the projection up until this point.
     if (sum(thisAmat<0)>0){
-      break
       warning(paste("Projection stopped at time step", i, "because the density-dependent projection matrix has negative values."))
+      break
     }
     
     Vec[(i + 1), ] <- thisAmat %*% Vec[i, ]

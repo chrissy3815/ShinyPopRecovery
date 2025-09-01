@@ -12,7 +12,7 @@ ui <- fluidPage(
   tabsetPanel(selected="Density-Dependent Recovery Trajectories",
               # User guide
               tabPanel("USER GUIDE",
-                       h3("USER GUIDE"),
+                       h3("USER GUIDE -- UNDER CONSTRUCTION"),
                        HTML("This user guide assumes some basic knowledge about MPMs: 
                  if you lack it, the MPM 'bible'
                  <i>Caswell (2001) Matrix Projection Models: Construction, 
@@ -21,10 +21,21 @@ ui <- fluidPage(
                        ),
                        br(), br(), br(),
                        h3("CHOOSING AN MPM"),
-                       HTML("Currently, the app contains four example matrices."),
+                       HTML("Currently, the app contains four example matrices. 
+                            This section is under construction, but there is some 
+                            basic information available in the MATRIX tab on the 
+                            right-hand side once you switch over to the 'Density-Dependent
+                            Recovery Trajectories'."),
                        br(),
                        br(),
                        h4("MATRICES"),
+                       HTML("THIS SECTION UNDER CONSTRUCTION"),
+                       br(),
+                       br(),
+                       h4("DENSITY-DEPENDENT FUNCTIONAL FORMS"),
+                       HTML("THIS SECTION UNDER CONSTRUCTION"),
+                       br(),
+                       br(),
                        h4("POPULATION STRUCTURES AND INITIAL VECTORS"),
                        HTML("The population structure is the proportion of each 
                       life history stage in the population. The population vector

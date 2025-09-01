@@ -7,17 +7,22 @@ server <- function(input, output) {
       updateSelectInput(inputId = 'DDfunc', selected = 'logistic')
       updateSelectInput(inputId = 'DDmethod', selected = 'matrix')
       updateNumericInput(inputId = 'K', value=110)
+      updateNumericInput(inputId = 'tmax', value=6)
     } else if (input$matrixID == 'graywolves'){
       updateSelectInput(inputId = 'DDfunc', selected = 'logistic')
       updateSelectInput(inputId = 'DDmethod', selected = 'matrix')
       updateNumericInput(inputId = 'K', value=969)
+      updateNumericInput(inputId = 'tmax', value=20)
     } else if (input$matrixID == 'falcons'){
       updateSelectInput(inputId = 'DDfunc', selected='log_pb')
       updateNumericInput(inputId = 'x0', value=2.36)
       updateNumericInput(inputId = 'x1', value=-0.014)
+      updateNumericInput(inputId = 'tmax', value=40)
     } else if (input$matrixID == 'crocs'){
       updateSelectInput(inputId = 'DDfunc', selected='logistic')
+      updateSelectInput(inputId = 'DDmethod', selected = 'matrix')
       updateNumericInput(inputId = 'K', value=100000)
+      updateNumericInput(inputId = 'tmax', value=20)
     }
   })
   

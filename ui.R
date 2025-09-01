@@ -8,7 +8,7 @@ ui <- fluidPage(
   titlePanel("ShinyPopRecovery"),
   
   
-  tabsetPanel(selected="DENSITY-DEPENDENT RECOVERY TRAJECTORIES",
+  tabsetPanel(selected="Density-Dependent Recovery Trajectories",
               # User guide
               tabPanel("USER GUIDE",
                        h3("USER GUIDE"),
@@ -35,16 +35,14 @@ ui <- fluidPage(
                  the recovery process.
                  The app currently allows three options for an initial population vector:
                  <ul>
-                     <li>Use the starting population vector that goes along with the published example.
-                     </li>
+                     <li>Use the starting population vector that goes along with the 
+                     <b>published</b> example. </li>
                      <li>A <b>random</b> population structure can be generated, 
                      and the user can specify the number of adults in the starting
-                     population.
-                     </li>
-                     <li> We can use the stable population structure as implied 
+                     population. </li>
+                     <li> We can use the <b>stable population structure</b> as implied 
                      by the low-density MPM, and the user can specify the number
-                     of adults in the starting population.
-                     </li>
+                     of adults in the starting population. </li>
                  </ul>"
                        ),
                        br(), br(), 
@@ -72,11 +70,11 @@ ui <- fluidPage(
                            "),
                        br(), br(),
                        HTML("If you'd like to get in touch, please e-mail me, at
-                      chrissy[dot]hernandez[at]biology.ox.ac.uk
+                      chrissy.hernandez[at]biology.ox.ac.uk
                            "),
                        br(), br(), br(), br(),
               ), # close USER GUIDE tabPanel
-              tabPanel("DENSITY-DEPENDENT RECOVERY TRAJECTORIES",
+              tabPanel("Density-Dependent Recovery Trajectories",
                        sidebarLayout(
                          sidebarPanel(width=4,
                                       selectInput("matrixID", label='Population matrix', 

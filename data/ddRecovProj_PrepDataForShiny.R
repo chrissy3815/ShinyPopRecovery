@@ -50,10 +50,22 @@ graywolves<- list("Amat"=graywolvesA,
                   "Umat"=graywolvesU,
                   "N0"=graywolvesN0,
                   "metadata"="The gray wolves example matrix comes from a study 
-                  in the Upper Peninsula of Michigan, USA (Miller et al. 2002 
-                  <i>Ecological Modelling</i>). Gray wolves (<i>Canis lupus</i>) 
-                  disappeared from the Upper Peninsula in ca. 1960, and gray 
-                  wolves were listed as federally endangered in the lower 48 
+                  in the Upper Peninsula of Michigan, USA 
+                  (<a href='https://doi.org/10.1016/S0304-3800(01)00493-8'>
+                  Miller et al. 2002 <i>Ecological Modelling</i></a>). 
+                 <br><br>
+                 The published model and its default settings for ShinyPopRecovery: 
+                 <ul>
+                     <li>a prebreeding Leslie (age-based) matrix for parameters at low density </li>
+                     <li>logistic density dependence</li>
+                     <li>applied to the entire matrix</li>
+                     <li>carrying capacity, K=969 wolves.</li>
+                 </ul>
+                 <br>
+                 <h5>Brief description of the study background and aims:</h5>
+                  Gray wolves (<i>Canis lupus</i>) disappeared from the Upper 
+                  Peninsula of Michigan in ca. 1960, and the species was listed 
+                  as federally endangered in the lower 48 
                   states in 1974. Thanks to legal protections, gray wolves 
                   recovered in the upper midwest and recolonized the Upper 
                   Peninsula of Michigan. The Michigan Dept. of Natural Resources 
@@ -64,10 +76,8 @@ graywolves<- list("Amat"=graywolvesA,
                   dynamics in the Upper Peninsula. They evaluated model 
                   performance by comparing it with the winter census data from 
                   1991-2000 and used the model to project when the population 
-                  would reach its carrying capacity. Their model, which had
-                  good performance when compared with winter census data, is a
-                  <b>prebreeding Leslie matrix</b> where <b>logistic density dependence</b> 
-                  (carrying capacity = 969 wolves) operates on the whole matrix.")
+                  would reach its carrying capacity. Their model had
+                  good performance when compared with winter census data.")
 
 # Crocodiles:
 stages<- c("Eggs","Hatchlings","Juveniles","Adults")
@@ -84,8 +94,23 @@ crocs<- list("Amat"=crocsA,
              "N0"=crocsN0,
              "metadata"="The crocodile example comes from a study in the Northern
              Territory, Australia, on saltwater crocodiles <i>Crocodylus porosus</i> 
-             (Fukuda et al. 2021 <i>Wildlife Research</i>). The authors of this 
-             study had access to a long term dataset (1971-2019) covering a period
+             (<a href='https://doi.org/10.1071/WR20033'>
+             Fukuda et al. 2020 <i>Wildlife Research</i></a>). 
+             <br><br>
+             This model contains highly stage-specific density-dependent processes, 
+             so we plan to build a vignette that compares the full model with a 
+             'data-poor' scenario that could be explored using ShinyPopRecovery. 
+             <br>
+             For now, the matrix model and default settings for the app are:
+             <ul>
+               <li>a postbreeding stage-based matrix (4 stages) with parameters at low density </li>
+               <li>logistic density dependence</li>
+               <li>applied to the entire matrix</li>
+               <li>carrying capacity, K=100,000 crocodiles total (including eggs).</li>
+             </ul>
+             <br>
+             <h5>Brief description of the study background and aims:</h5>
+             The authors of this study had access to a long term dataset (1971-2019) covering a period
              of recovery for the population, so they were able to incorporate 
              highly specific effects of density dependence. <br>
              They built a <b>four-stage postbreeding matrix model</b> and estimated
@@ -96,10 +121,14 @@ crocs<- list("Amat"=crocsA,
                  <li> Adult survival follows a Ricker function based on the density of adults </li>
                  <li> Adult reproduction follows a Beverton-Holt function based on the density of adult females </li>
              </ul>
-             <p> Here, we provide the population projection matrix corresponding to low density,
-             and allow users to play around with different density-dependent functions and methods.</p>
-             Eventually, we would like to have a more complete example where users could turn on and off the different 
-             density-dependent parameters for this crocodile model, but that does not exist in our code base yet.")
+             <p> The authors used their full model to evaluate the impact of egg 
+             harvesting on the population dynamics and viability.</p>
+             <br>
+             Here, we provide the population projection matrix corresponding to low density,
+             and allow users to play around with different density-dependent functions and methods.
+             Eventually, we would like to have a more complete example where users 
+             could turn on and off the different density-dependent parameters for 
+             this crocodile model.")
 
 # Falcons:
 stages<- c("Juv (wild)", "Juv (captive)", "Adult (non-breeding)", "Adult (breeding)")
@@ -116,11 +145,42 @@ falcons<- list("Amat"=falconsA,
                "Umat"=falconsU,
                "N0"=falconsN0,
                "metadata"="The peregrine falcon (<i> Falco peregrinus anatum</i>)
-               example comes from a study in California, USA (Schipper et al. 
-               2013 Journal of Applied Ecology). Management of peregrine
-               falcons included a captive breeding program and population monitoring
-               starting from 1975. <br>
-               MORE TO BE ADDED HERE.")
+               example comes from a study in California, USA.
+               (<a href='https://doi.org/10.1111/1365-2664.12142'>
+               Schipper et al. 2013 <i>Journal of Applied Ecology</i></a>). 
+               <br><br>
+               The published model and its default settings for ShinyPopRecovery: 
+               <ul>
+                  <li>a postbreeding stage-based matrix (four stages) for parameters at low density </li>
+                  <li>density-dependence in the form of competition for a breeding site:
+                  non-breeders have a logistic probability of becoming a breeder, depending
+                  on how many breeders there currently are,</li>
+                  <li>applied only to matrix elements that contain the probability of breeding
+                  (<i>i.e.</i>, stasis in non-breeder stage, progression from non-breeder to
+                  breeder stage, and first-year reproduction by non-breeders that progress),</li>
+                  <li>logistic probability function intercept of 2.36, </li>
+                  <li> logistic probability function slope of -0.014.</li>
+               </ul>
+               <br>
+               <h5>Brief description of the study background and aims:</h5>
+               Management of peregrine falcons included a captive breeding program 
+               and population monitoring starting from 1975. A previous study 
+               (<a https://doi.org/10.1086/424763> Kauffman et al. 2004</a>) used
+               long-term monitoring data and built a four-stage matrix model with
+               multiple subpopulations connected via dispersal to look at 
+               spatially-structured demography across California. The model includes
+               four stages:
+               <ul>
+                  <li> First-year wild-fledged birds</li>
+                  <li> First-year hacked birds ('hacked' refers to various management 
+                       interventions for fledglings) </li>
+                  <li> Non-breeding adults</li>
+                  <li> Breeding adults </li>
+               </ul>
+               Schipper et al. (2013) published a simplified version of the model without
+               the spatial component, representing the entire California region
+               as a single, closed population. Their goals was to understand the
+               interacting effects of toxicants and density dependence on the falcons.")
 
 
 MPMs_preloaded<- list("whitedeer"=whitedeer,

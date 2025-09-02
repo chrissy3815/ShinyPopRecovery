@@ -459,7 +459,8 @@ apply_Dfactor<- function(Fmat, Umat, N, DDfunc, DDparams, DDmethod='matrix',
     # Apply the DD parameter to the whole matrix:
     if (DDmethod=="matrix"){ 
       eye<- diag(1, nrow=nrow(Amat), ncol=ncol(Amat))
-      Amat_N<- Dfactor*(Amat-eye)+eye
+      #Amat_N<- Dfactor*(Amat-eye)+eye
+      Amat_N<- Dfactor*Amat
     } else if (DDmethod=='survival'){
       Umat_N<- Dfactor*(Umat)
       Amat_N<- Fmat + Umat_N

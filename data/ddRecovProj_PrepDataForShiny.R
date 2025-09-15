@@ -209,7 +209,6 @@ ogawa<- list("Amat"=ogawaA,
                   <li>Ricker model strength parameter is 0.281 </li>
                   <li>NB: This model has a four year time step! </li>
                </ul>
-               <br>
                Also, in this study, the density-dependent reproduction was based 
                on the density of reproductive individuals (DBH of 32 cm and higher).
                Although this functionality has not yet been fully added to ShinyPopRecovery, 
@@ -218,7 +217,7 @@ ogawa<- list("Amat"=ogawaA,
                switch the way that density dependence is applied (e.g. to the full matrix
                or survival only), then the density will be calculated as the sum of 
                densities across all classes.
-               <br>
+               <br><br>
                <h5>Brief description of the study background and aims:</h5>
                TO BE ADDED")
 

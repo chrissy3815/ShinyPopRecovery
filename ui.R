@@ -150,6 +150,21 @@ ui <- fluidPage(
                                                                  value="[1,4]")
                                       ),
                                       
+                                      selectInput('DDcalcN', label='How do you want to calculate population density?',
+                                                  choices=c("Sum of all age/stage/size classes" = 'all',
+                                                            "Sum of reproductively active size classes" = 'repro_classes',
+                                                            "I want to specify which classes" = 'specify')
+                                      ),
+                                      
+                                      conditionalPanel(id="ismemberN", 
+                                                       condition="input.DDcalcN == 'specify'",
+                                                       textInput(inputId = 'ismemberN', 
+                                                                 label='Provide a comma-separated list of the size/stage/age 
+                                                                 classes which should be summed to calculate population density 
+                                                                 for the density-dependent function.',
+                                                                 value="1,3,5")
+                                      ),
+                                      
                                       numericInput('tmax', label='How many years into the future do you want to project?',
                                                    value=20, min=1, max=1000
                                       ),

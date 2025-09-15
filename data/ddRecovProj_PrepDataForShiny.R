@@ -24,7 +24,7 @@ whitedeer<- list("Amat"=whitedeerA,
                      <li>a prebreeding Leslie (age-based) matrix for parameters at low density </li>
                      <li>logistic density dependence</li>
                      <li>applied to the entire matrix</li>
-                     <li>carrying capacity, K=110 female deer.</li>
+                     <li>carrying capacity, K=110 female deer (sum of all age classes).</li>
                  </ul>
                  <br>
                  <h5>Brief description of the study background and aims:</h5>
@@ -59,7 +59,7 @@ graywolves<- list("Amat"=graywolvesA,
                      <li>a prebreeding Leslie (age-based) matrix for parameters at low density </li>
                      <li>logistic density dependence</li>
                      <li>applied to the entire matrix</li>
-                     <li>carrying capacity, K=969 wolves.</li>
+                     <li>carrying capacity, K=969 wolves (sum of all age classes).</li>
                  </ul>
                  <br>
                  <h5>Brief description of the study background and aims:</h5>
@@ -207,17 +207,11 @@ ogawa<- list("Amat"=ogawaA,
                   the diameter at breast height, DBH, for individual trees) for parameters at low density </li>
                   <li>density-dependence affects reproduction following a Ricker model</li>
                   <li>Ricker model strength parameter is 0.281 </li>
+                  <li>Population density is calculated as the number of reproductively active
+                  individuals, specifically individuals with DBH of 32 cm or greater. </li>
                   <li>NB: This model has a four year time step! </li>
                </ul>
-               Also, in this study, the density-dependent reproduction was based 
-               on the density of reproductive individuals (DBH of 32 cm and higher).
-               Although this functionality has not yet been fully added to ShinyPopRecovery, 
-               we control this example behind the scenes so that the default settings 
-               will reproduce Figure 2 from the original publication. However, if you 
-               switch the way that density dependence is applied (e.g. to the full matrix
-               or survival only), then the density will be calculated as the sum of 
-               densities across all classes.
-               <br><br>
+               <br>
                <h5>Brief description of the study background and aims:</h5>
                TO BE ADDED")
 

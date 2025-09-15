@@ -12,6 +12,8 @@ server <- function(input, output) {
       input$x1
       input$theta
       input$DDmethod
+      input$DDcalcN
+      input$ismemberN
       input$tmax
       input$vectorMethod
       input$DDelem
@@ -29,26 +31,32 @@ server <- function(input, output) {
       updateSelectInput(inputId = 'DDmethod', selected = 'matrix')
       updateNumericInput(inputId = 'K', value=110)
       updateNumericInput(inputId = 'tmax', value=20)
+      updateSelectInput(inputId = 'DDcalcN', selected = 'all')
     } else if (input$matrixID == 'graywolves'){
       updateSelectInput(inputId = 'DDfunc', selected = 'logistic')
       updateSelectInput(inputId = 'DDmethod', selected = 'matrix')
       updateNumericInput(inputId = 'K', value=969)
       updateNumericInput(inputId = 'tmax', value=20)
+      updateSelectInput(inputId = 'DDcalcN', selected = 'all')
     } else if (input$matrixID == 'falcons'){
       updateSelectInput(inputId = 'DDfunc', selected='log_pb')
       updateNumericInput(inputId = 'x0', value=2.36)
       updateNumericInput(inputId = 'x1', value=-0.014)
       updateNumericInput(inputId = 'tmax', value=40)
+      updateSelectInput(inputId = 'DDcalcN', selected='specify')
+      updateTextInput(inputId = 'ismemberN', value="4")
     } else if (input$matrixID == 'crocs'){
       updateSelectInput(inputId = 'DDfunc', selected='logistic')
       updateSelectInput(inputId = 'DDmethod', selected = 'matrix')
       updateNumericInput(inputId = 'K', value=100000)
       updateNumericInput(inputId = 'tmax', value=20)
+      updateSelectInput(inputId = 'DDcalcN', selected = 'all')
     } else if (input$matrixID == 'ogawa'){
       updateSelectInput(inputId = 'DDfunc', selected='ricker')
       updateSelectInput(inputId = 'DDmethod', selected = 'fertility')
       updateNumericInput(inputId = 'b', value=0.218)
       updateNumericInput(inputId = 'tmax', value=400)
+      updateSelectInput(inputId = 'DDcalcN', selected='repro_classes')
     }
   })
   
@@ -82,19 +90,30 @@ server <- function(input, output) {
       DDparams<- list(x0=input$x0, x1=input$x1)
     }
     
+    if(input$DDcalcN=='repro_classes'){
+      I<- which(colSums(Fmat)>0)
+      Nmembers<- I
+    } else if (input$DDcalcN=='all'){
+      Nmembers<- 1:dim(Fmat)[1]
+    } else if (input$DDcalcN=='specify'){
+      Nmembers<- as.numeric(unlist(strsplit(input$ismemberN,",")))
+    }
+    
+    if(input$matrixID=='ogawa'){
+      tmax<- input$tmax/4
+    } else {
+      tmax<- input$tmax
+    }
+    
     if (input$DDfunc=='log_pb'){
       proj_out<- project_Dfactor(Fmat, Umat, vector=N0, time=input$tmax, return.vec=TRUE,
                                  DDfunc=input$DDfunc, DDparams=DDparams,
                                  DDmethod='reprotrans')
-    } else if (input$matrixID=='ogawa' & input$DDmethod=='fertility'){
-      proj_out<- project_Dfactor(Fmat, Umat, vector=N0, time=input$tmax/4, return.vec=TRUE,
-                                 DDfunc=input$DDfunc, DDparams=DDparams,
-                                 DDmethod=input$DDmethod, ismemberN = c(4,5))
     } else{
       proj_out<- tryCatch({
-        withCallingHandlers({project_Dfactor(Fmat, Umat, vector=N0, time=input$tmax, return.vec=TRUE,
+        withCallingHandlers({project_Dfactor(Fmat, Umat, vector=N0, time=tmax, return.vec=TRUE,
                                              DDfunc=input$DDfunc, DDparams=DDparams,
-                                             DDmethod=input$DDmethod)},
+                                             DDmethod=input$DDmethod, ismemberN = Nmembers)},
                             warning = function(w) {
                               warning_message(conditionMessage(w))  # Capture warning
                               invokeRestart("muffleWarning")  # Prevent it from printing

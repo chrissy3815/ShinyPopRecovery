@@ -154,7 +154,7 @@ server <- function(input, output) {
     D_factor[D_factor<0]<- NA
     
     plot(Nvals, D_factor, type='l', cex.lab=1.5, cex.axis=1.5,
-         xlab='Population size', ylab='Scaling factor', lwd=2)
+         xlab='Population density', ylab='Scaling factor', lwd=2)
   })
   
   output$projplot<- renderPlot({

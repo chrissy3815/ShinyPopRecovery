@@ -203,7 +203,7 @@ ui <- fluidPage(
                                    ~1 at low density and ~0 at high density). What happens to the 
                                    RECOVERY SIMULATION if density dependence affects only 
                                    survival? only fertility?</li>
-                                   <li> You could also <b>try changing the funciontal form of
+                                   <li> You could also <b>try changing the functional form of
                                    density dependence</b>. The parameters you can set may change 
                                    (<i>e.g.</i>, K in the case of the logistic function, b in the 
                                    case of the Ricker and Beverton-Holt models). If the results don't 

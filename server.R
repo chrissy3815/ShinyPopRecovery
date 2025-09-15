@@ -28,7 +28,7 @@ server <- function(input, output) {
       updateSelectInput(inputId = 'DDfunc', selected = 'logistic')
       updateSelectInput(inputId = 'DDmethod', selected = 'matrix')
       updateNumericInput(inputId = 'K', value=110)
-      updateNumericInput(inputId = 'tmax', value=6)
+      updateNumericInput(inputId = 'tmax', value=20)
     } else if (input$matrixID == 'graywolves'){
       updateSelectInput(inputId = 'DDfunc', selected = 'logistic')
       updateSelectInput(inputId = 'DDmethod', selected = 'matrix')
@@ -44,6 +44,11 @@ server <- function(input, output) {
       updateSelectInput(inputId = 'DDmethod', selected = 'matrix')
       updateNumericInput(inputId = 'K', value=100000)
       updateNumericInput(inputId = 'tmax', value=20)
+    } else if (input$matrixID == 'ogawa'){
+      updateSelectInput(inputId = 'DDfunc', selected='ricker')
+      updateSelectInput(inputId = 'DDmethod', selected = 'fertility')
+      updateNumericInput(inputId = 'b', value=0.218)
+      updateNumericInput(inputId = 'tmax', value=400)
     }
   })
   
@@ -81,6 +86,10 @@ server <- function(input, output) {
       proj_out<- project_Dfactor(Fmat, Umat, vector=N0, time=input$tmax, return.vec=TRUE,
                                  DDfunc=input$DDfunc, DDparams=DDparams,
                                  DDmethod='reprotrans')
+    } else if (input$matrixID=='ogawa' & input$DDmethod=='fertility'){
+      proj_out<- project_Dfactor(Fmat, Umat, vector=N0, time=input$tmax/4, return.vec=TRUE,
+                                 DDfunc=input$DDfunc, DDparams=DDparams,
+                                 DDmethod=input$DDmethod, ismemberN = c(4,5))
     } else{
       proj_out<- tryCatch({
         withCallingHandlers({project_Dfactor(Fmat, Umat, vector=N0, time=input$tmax, return.vec=TRUE,
@@ -134,8 +143,13 @@ server <- function(input, output) {
     if(sum(!is.na(proj_out()$pop))<2){
       plot(NULL, cex.lab=1.5, cex.axis=1.5, xlim=c(0, input$tmax), ylim=c(0,100),
            xlab='Years since recovery initiated', ylab='Population size', main='')
-    } else{
-      plot(proj_out()$pop[-1], type='l', lwd=4, lty=2, cex.lab=1.5, cex.axis=1.5,
+    } else if (input$matrixID=='ogawa'){
+      years<- seq(0, input$tmax, by=4)
+      plot(years, proj_out()$pop, type='l', lwd=4, lty=2, cex.lab=1.5, cex.axis=1.5,
+           xlab='Years since recovery initiated', ylab='Population size', main='')
+    }
+    else{
+      plot(0:input$tmax, proj_out()$pop, type='l', lwd=4, lty=2, cex.lab=1.5, cex.axis=1.5,
            xlab='Years since recovery initiated', ylab='Population size', main='')
     }
     

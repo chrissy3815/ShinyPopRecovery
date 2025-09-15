@@ -95,7 +95,8 @@ ui <- fluidPage(
                                                   choices=c("White-tailed deer" = 'whitedeer',
                                                             "Gray wolves" = 'graywolves',
                                                             "Crocodiles" = 'crocs',
-                                                            "Peregrine falcon" = 'falcons')
+                                                            "Peregrine falcon" = 'falcons',
+                                                            "Broad-leafed forest (mixed species)" = 'ogawa')
                                       ),
                                       
                                       selectInput('DDfunc',label='Functional form of density dependence',

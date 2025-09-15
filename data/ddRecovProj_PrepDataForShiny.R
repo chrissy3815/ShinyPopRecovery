@@ -182,11 +182,52 @@ falcons<- list("Amat"=falconsA,
                as a single, closed population. Their goals was to understand the
                interacting effects of toxicants and density dependence on the falcons.")
 
+# Ogawa forest (Takada and Nakashizuka 1996)
+stages<- c("4cm<DBH<8cm", "8cm<DBH<16cm", "16cm<DBH<32cm", "32cm<DBH<64cm", "64cm<DBH")
+ogawaF<- matrix(0, nrow=5, ncol=5, dimnames=list(stages,stages))
+ogawaF[1,]<- c(0,0,0, exp(0.463), exp(0.463))
+ogawaU<- matrix(0, nrow=5, ncol=5, dimnames=list(stages,stages))
+diag(ogawaU)<- c(0.879, 0.919, 0.908, 0.967, 0.963)
+diag(ogawaU[-1,])<- c(0.078, 0.028, 0.040, 0.013)
+diag(ogawaU[,-1])<- c(0.007, 0.006, 0.002, 0)
+ogawaA<- ogawaU+ogawaF
+ogawaN0<- c(13.83, 10.8, 5.77, 3.47, 0.72)
+ogawa<- list("Amat"=ogawaA,
+               "Fmat"=ogawaF,
+               "Umat"=ogawaU,
+               "N0"=ogawaN0,
+               "metadata"="The broad-leafed forest (mixed species) example comes 
+               from a study in the Ogawa Forest Reserve in eastern Japan
+               (<a href='https://doi.org/10.1007/BF00045495'>
+               Takada and Nakashizuka 1996 <i>Vegetatio</i></a>). 
+               <br><br>
+               The published model and its default settings for ShinyPopRecovery: 
+               <ul>
+                  <li>a prebreeding size-based matrix (five size classes based on 
+                  the diameter at breast height, DBH, for individual trees) for parameters at low density </li>
+                  <li>density-dependence affects reproduction following a Ricker model</li>
+                  <li>Ricker model strength parameter is 0.281 </li>
+                  <li>NB: This model has a four year time step! </li>
+               </ul>
+               <br>
+               Also, in this study, the density-dependent reproduction was based 
+               on the density of reproductive individuals (DBH of 32 cm and higher).
+               Although this functionality has not yet been fully added to ShinyPopRecovery, 
+               we control this example behind the scenes so that the default settings 
+               will reproduce Figure 2 from the original publication. However, if you 
+               switch the way that density dependence is applied (e.g. to the full matrix
+               or survival only), then the density will be calculated as the sum of 
+               densities across all classes.
+               <br>
+               <h5>Brief description of the study background and aims:</h5>
+               TO BE ADDED")
+
 
 MPMs_preloaded<- list("whitedeer"=whitedeer,
                       "graywolves"=graywolves,
                       "crocs"=crocs,
-                      "falcons"=falcons)
+                      "falcons"=falcons, 
+                      "ogawa"=ogawa)
 
 save(MPMs_preloaded, file="data/ExampleMPMs_forShiny.RDS")
 

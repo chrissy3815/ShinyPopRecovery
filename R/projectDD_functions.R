@@ -540,7 +540,7 @@ apply_Dfactor<- function(Fmat, Umat, N, DDfunc, DDparams, DDmethod='matrix',
 ## dependence using the Dfactor
 project_Dfactor<- function(Fmat, Umat, vector=NULL, time=100, return.vec=TRUE, 
                            DDfunc="Ricker", DDparams=NULL, DDmethod='matrix', 
-                           matelem=NULL){
+                           matelem=NULL, ismemberN=NULL){
   # This function takes a single set of low-density vital rates in the form of a
   # reproduction matrix (Fmatrix) and transition matrix (Umatrix), and then
   # projects using the chosen DD function and DD method
@@ -566,6 +566,14 @@ project_Dfactor<- function(Fmat, Umat, vector=NULL, time=100, return.vec=TRUE,
     stagenames <- paste("S", as.character(1:order), sep = "")
   }
   
+  # Which classes of the population contribute to the count of N?
+  if (DDfunc=="log_pb" & is.null(ismemberN)){
+    ismemberN<- 4
+  }
+  else if (is.null(ismemberN)){
+    ismemberN<- 1:length(stagenames)
+  }
+  
   # Initialize an output object:
   out<- list(pop=vector(), vec=matrix(), mat=matrix())
   
@@ -584,13 +592,9 @@ project_Dfactor<- function(Fmat, Umat, vector=NULL, time=100, return.vec=TRUE,
   Vec[1, ] <- n0
   Pop[1] <- sum(n0)
   for (i in 1:time) {
-    if (DDfunc=="log_pb"){
-      thisAmat<- apply_Dfactor(Fmat, Umat, N=Vec[i,4], DDfunc, DDparams, 
-                               DDmethod, matelem)
-    } else {
-      thisAmat<- apply_Dfactor(Fmat, Umat, Pop[i], DDfunc, DDparams, DDmethod, 
+    thisN<- sum(Vec[i,ismemberN])
+    thisAmat<- apply_Dfactor(Fmat, Umat, thisN, DDfunc, DDparams, DDmethod, 
                                matelem)
-    }
     
     # If the projection matrix has any negative values in it, stop iterating but
     # return the projection up until this point.

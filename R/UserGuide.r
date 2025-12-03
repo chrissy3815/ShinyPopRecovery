@@ -71,7 +71,7 @@ userguidecontents<- function(id){
                            "),
            br(), br(),
            HTML("If you'd like to get in touch, please e-mail me, at
-                      chrissy.hernandez[at]biology.ox.ac.uk
+                      cmhernan[at]odu.edu
                            "),
            br(), br(), br(), br(),
   )

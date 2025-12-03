@@ -239,6 +239,38 @@
         "RemoteSha": "2.0.0"
       }
     },
+    "denseRpop": {
+      "Source": "github",
+      "Repository": null,
+      "description": {
+        "Package": "denseRpop",
+        "Title": "Population Projections for Density-Dependent Population Models",
+        "Version": "0.0.0.9000",
+        "Authors@R": "\n    person(\"Christina\", \"Hernandez\", , \"christinahernan@gmail.com\", role = c(\"aut\", \"cre\", \"cph\"),\n    comment=c(ORCID = \"0000-0002-7188-8217\"))",
+        "Description": "Population projections for density-dependent population models. ADD MORE HERE.",
+        "License": "MIT + file LICENSE",
+        "Encoding": "UTF-8",
+        "Roxygen": "list(markdown = TRUE)",
+        "RoxygenNote": "7.3.3",
+        "URL": "https://github.com/chrissy3815/denseRpop",
+        "BugReports": "https://github.com/chrissy3815/denseRpop/issues",
+        "RemoteType": "github",
+        "RemoteHost": "api.github.com",
+        "RemoteRepo": "denseRpop",
+        "RemoteUsername": "chrissy3815",
+        "RemoteRef": "HEAD",
+        "RemoteSha": "f4efcddbc11d12fdd64248189fcdbdf509a24476",
+        "GithubRepo": "denseRpop",
+        "GithubUsername": "chrissy3815",
+        "GithubRef": "HEAD",
+        "GithubSHA1": "f4efcddbc11d12fdd64248189fcdbdf509a24476",
+        "NeedsCompilation": "no",
+        "Packaged": "2025-12-03 12:16:47 UTC; chrissy",
+        "Author": "Christina Hernandez [aut, cre, cph] (ORCID:\n    <https://orcid.org/0000-0002-7188-8217>)",
+        "Maintainer": "Christina Hernandez <christinahernan@gmail.com>",
+        "Built": "R 4.5.1; ; 2025-12-03 12:16:48 UTC; unix"
+      }
+    },
     "digest": {
       "Source": "CRAN",
       "Repository": "https://cran.rstudio.com",
@@ -1065,7 +1097,7 @@
       "checksum": "22703af4398586fc546b6ce21bc43bd6"
     },
     "global.R": {
-      "checksum": "c653de05df4cf61ed217a03f2ac432a4"
+      "checksum": "2a9bf6c2a5908e41e9b6f733474fe550"
     },
     "LICENSE": {
       "checksum": "0ec4a8be366a94376572e0cd964d1ac8"
@@ -1082,9 +1114,6 @@
     "R/params.r": {
       "checksum": "1ef2da81b397dbc6357e03ad44afb932"
     },
-    "R/projectDD_functions.R": {
-      "checksum": "bc433b5bdfe2f0fce0006a000ef7fdfe"
-    },
     "R/Projection.r": {
       "checksum": "a9f21a0897d639ac139ccc525a8662f7"
     },
@@ -1099,6 +1128,9 @@
     },
     "runApp.R": {
       "checksum": "b581f500e8604c520b3cc47a73d940f0"
+    },
+    "sandbox/projectDD_functions.R": {
+      "checksum": "bc433b5bdfe2f0fce0006a000ef7fdfe"
     },
     "server.R": {
       "checksum": "fcdea77122d041a9150284106652ff1f"
